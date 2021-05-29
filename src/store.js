@@ -9,6 +9,7 @@ const reducer = (prevState, action) => {
     const {type} = action
     if (type === SET_TOKEN) {
         const {payload: jwtToken} = action
+        debugger
         const newState = {...prevState, jwtToken, isAuthenticated : true}
         return UpdateWithSideEffect(newState, (state, dispatch) => {
             setStorageItem('jwtToken', jwtToken)

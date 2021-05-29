@@ -8,7 +8,8 @@ import {axiosInstance} from "api";
 import styled from 'styled-components';
 import {Link} from 'react-router-dom'
 
-const apiUrl = "/accounts/token/"
+
+const apiUrl = "/user/login/"
 const {Text} = Typography;
 
 
@@ -36,13 +37,13 @@ export default function Login() {
 
     const onFinish = (values) => {
         async function fn() {
-            const {username, password} = values
-            const data = {username, password}
+            const {user_id, password} = values
+            const data = {user_id, password}
             setFieldErrors({})
 
             try {
                 const response = await axiosInstance.post(apiUrl, data)
-                const {data: {token: jwtToken}} = response
+                const {data: { results: {token: jwtToken}}} = response
 
                 // setJwtToken(jwtToken)
                 dispatch(setToken(jwtToken))
@@ -83,16 +84,16 @@ export default function Login() {
                     <Row align="center">
                         <Col span={12}>
                             <Form.Item
-                                label="Username"
-                                name="username"
+                                label="UserID"
+                                name="user_id"
                                 rules={[
                                     {
                                         required: true,
                                         message: 'Please input your username!',
                                     },
                                     {
-                                        min: 5,
-                                        message: '5글자를 입력해주세요. ',
+                                        min: 2,
+                                        message: '2글자를 입력해주세요. ',
                                     }
                                 ]}
                                 hasFeedback
@@ -107,7 +108,7 @@ export default function Login() {
                     <Row align="center">
                         <Col span={12}>
                             <Form.Item
-                                label="Password"
+                                label="password"
                                 name="password"
                                 rules={[
                                     {

@@ -5,7 +5,7 @@ import {SmileOutlined, FrownOutlined} from '@ant-design/icons';
 import {axiosInstance} from "api";
 import styled from "styled-components";
 
-const apiUrl = "/accounts/signup/"
+const apiUrl = "/user/signup/"
 
 
 const Container = styled.div`
@@ -23,8 +23,8 @@ export default function Signup() {
 
     const onFinish = (values) => {
         async function fn() {
-            const {username, password, first_name, last_name, email} = values
-            const data = {username, password, first_name, last_name, email }
+            const {user_id, password, username} = values
+            const data = {user_id, password, username  }
 
             setFieldErrors({})
 
@@ -75,16 +75,16 @@ export default function Signup() {
                     <Row align="center">
                         <Col span={12}>
                             <Form.Item
-                                label="Username"
-                                name="username"
+                                label="user_id"
+                                name="user_id"
                                 rules={[
                                     {
                                         required: true,
                                         message: 'Please input your username!',
                                     },
                                     {
-                                        min: 5,
-                                        message: '5글자를 입력해주세요. ',
+                                        min: 2,
+                                        message: '2글자를 입력해주세요. ',
                                     }
                                 ]}
                                 hasFeedback
@@ -116,8 +116,8 @@ export default function Signup() {
                     <Row align="center">
                         <Col span={12}>
                             <Form.Item
-                                label="Email"
-                                name="email"
+                                label="username"
+                                name="username"
                                 rules={[
                                     {
                                         required: true,
@@ -131,41 +131,6 @@ export default function Signup() {
                         </Col>
                     </Row>
 
-                    <Row align="center">
-                        <Col span={12}>
-                            <Form.Item
-                                label="Firstname"
-                                name="first_name"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input your firstname!',
-                                    },
-                                ]}
-                                {...fieldErrors.first_name}
-                            >
-                                <Input/>
-                            </Form.Item>
-                        </Col>
-                    </Row>
-
-                    <Row align="center">
-                        <Col span={12}>
-                            <Form.Item
-                                label="Lastname"
-                                name="last_name"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input your last_name!',
-                                    },
-                                ]}
-                                {...fieldErrors.last_name}
-                            >
-                                <Input/>
-                            </Form.Item>
-                        </Col>
-                    </Row>
 
                     <Row align="center">
                         <Col span={12}>
